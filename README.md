@@ -1,3 +1,4 @@
+```
 ├── backend/
 │   ├── config/
 │   │   └── db.js            # MongoDB connection configuration
@@ -22,3 +23,4 @@
 │   ├── .env                        # Environment variables
 │   ├── server.js                   # Entry point for the backend
 │   └── package.json 
+```

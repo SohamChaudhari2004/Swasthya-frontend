@@ -1,11 +1,19 @@
-// models/Hospital.js
 const mongoose = require('mongoose');
 
-const hospitalSchema = new mongoose.Schema({
+const HospitalSchema = new mongoose.Schema({
   name: { type: String, required: true },
   address: { type: String, required: true },
-  phoneNumber: { type: String }, // Optional, add more fields as required
+  contact: { type: String, required: true },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'], // GeoJSON
+      required: true,
+    },
+    coordinates: { type: [Number], required: true },
+  },
 });
 
-const Hospital = mongoose.model('Hospital', hospitalSchema); // Ensure the model is registered
-module.exports = Hospital; // Export the model
+HospitalSchema.index({ location: '2dsphere' }); // Geo-spatial indexing
+
+module.exports = mongoose.model('Hospital', HospitalSchema);

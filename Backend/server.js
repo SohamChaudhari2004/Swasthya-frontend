@@ -22,6 +22,9 @@ app.use('/api/auth', require('./routes/authRoutes'));
 // app.use('/api/hospitals', require('./routes/hospitalRoutes'));
 // app.use('/api/records', require('./routes/recordRoutes'));
 app.use('/api/appointments', require('./routes/appointmentRoutes'));
+app.use('/api/hospitals', require('./routes/hospitalRoutes'));
+app.use('/api/records', require('./routes/recordRoutes'));
+
 
 // Error Handling
 app.use((err, req, res, next) => {

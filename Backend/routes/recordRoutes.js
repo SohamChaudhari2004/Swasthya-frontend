@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUserRecords, addRecord, deleteRecord } = require('../controllers/recordController');
+const { getUserRecords, addRecord, deleteRecord } = require('../controller/recordController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();

@@ -12,11 +12,8 @@ exports.registerUser = async (req, res) => {
       return res.status(400).json({ error: 'Email already exists.' });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
-    const user = await User.create({ name, email, password: hashedPassword });
+    // Create user (password will be hashed by the pre-save middleware)
+    const user = await User.create({ name, email, password });
 
     // Generate JWT token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
@@ -37,8 +34,8 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Compare passwords
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    // Use the model's comparePassword method
+    const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
